@@ -5,7 +5,7 @@ const initialState = {
     username: "",
     email: "",
     password: "",
-    role: "",
+    role: "student",
     country: "",
     tasks: [],
     times: [],
