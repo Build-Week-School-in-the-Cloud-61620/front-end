@@ -19,7 +19,7 @@ function Signup() {
 
   return (
     <Form style={{ margin: "15%" }}>
-      <Card color="info">
+      <Card color='' style={{background: '#87CEFA'}}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Sign Up Here!</h2>
       </Card>
       <FormGroup>

@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <Form style={{ margin: "5%" }}>
-        <Card color="info">
+      <Card color='' style={{background: '#87CEFA'}}>
           <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>
             Welcome to the Home Page!
           </h2>
@@ -15,10 +15,20 @@ function Home() {
 
       <Card style={{ margin: "10%" }}>
         <div>
-          <Link to="/login">Login</Link>
+          <Link to="/student">Student Page</Link>
+        </div>
+        <div>
+          <Link to="/volunteer">Volunteer Page</Link>
+        </div>
+        <div>
+          <Link to="/admin">Admin Page</Link>
         </div>
         <br />
-        <p>OR</p>
+        <div>
+          <Link to="/login">Login</Link>
+        </div>
+       
+       
         <div>
           <Link to="/signup">Signup</Link>
         </div>
