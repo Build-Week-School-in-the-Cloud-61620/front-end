@@ -12,6 +12,7 @@ import {
   DropdownMenu,
 } from "reactstrap";
 import { loginUser } from "../actions";
+import RoleDropdown from "./RoleDropdown";
 
 const Login = () => {
   //React-redux hook used to call dispatch from actions folder...
@@ -21,7 +22,7 @@ const Login = () => {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
-    role: "",
+    role: "admin",
   });
 
   //Destructured credentials object...
@@ -37,13 +38,16 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginUser(credentials));
     setCredentials({ username: "", password: "", role: "" });
+    if(e.target.name === "role") {
+      setCredentials({...credentials, role: e.target.value.toLowerCase()})
+    }
   };
   console.log(credentials);
 
   //Added functionality to form...
   return (
     <Form onSubmit={handleSubmit} style={{ margin: "15%" }}>
-      <Card color='' style={{background: '#87CEFA'}}>
+      <Card color="" style={{ background: "#87CEFA" }}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Login Here!</h2>
       </Card>
       <FormGroup>
@@ -70,7 +74,7 @@ const Login = () => {
         />
       </FormGroup>
       {/* Added select component from reactstrap to add role to login form*/}
-      <FormGroup>
+      {/* <FormGroup>
         <Label for="exampleSelect">Select</Label>
         <Input
           type="select"
@@ -83,7 +87,8 @@ const Login = () => {
           <option>Student</option>
           <option>Volunteer</option>
         </Input>
-      </FormGroup>
+      </FormGroup> */}
+      <RoleDropdown value={role} onChange={handleChanges} />
 
       <Button type="submit">Submit</Button>
     </Form>
