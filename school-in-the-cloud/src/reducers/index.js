@@ -1,4 +1,9 @@
-import { LOGIN_USER_SUCCESS } from "../actions";
+import {
+  LOGIN_USER_SUCCESS,
+  CREATE_USER_START,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAILURE,
+} from "../actions";
 
 const initialState = {
   user: {
@@ -12,19 +17,24 @@ const initialState = {
     tasks: [],
     times: [],
   },
+  error: "",
+  success: "",
+  creatingUser: false,
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER_SUCCESS:
+    case CREATE_USER_START:
+      return { ...state, creatingUser: true, error: "", success: "" };
+    case CREATE_USER_SUCCESS:
       return {
         ...state,
-        username: action.payload.username,
-        password: action.payload.password,
-        role: action.payload.role.toLowerCase(),
+        creatingUser: false,
+        success: "User created successfully. Please login",
       };
+    case CREATE_USER_FAILURE:
+      return { ...state, creatingUser: false, error: action.payload };
     default:
-      console.log(state);
       return state;
   }
 };
