@@ -1,6 +1,8 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
 import axios from "axios";
 
+import { useHistory } from "react-router-dom";
+
 export const CREATE_USER_START = "CREATE_USER_START";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const CREATE_USER_FAILURE = "CREATE_USER_FAILURE";
@@ -22,13 +24,15 @@ export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
 export const FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE";
 
 //Login user action, needs api call to hit db, but taking in data...
-export const loginUser = (credentials) => (dispatch) => {
+export const loginUser = (credentials, props) => (dispatch) => {
   dispatch({ type: LOGIN_USER_START });
   axiosWithAuth()
     .post(`/auth/login`, credentials)
     .then((res) => {
-      dispatch({ type: LOGIN_USER_SUCCESS });
-      localStorage.setItem("token", res.data.payload);
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.user });
+      console.log(res, res.data);
+      localStorage.setItem("token", res.data.token);
+      props.history.push("/protected");
     })
     .catch((err) => {
       console.log(err);
