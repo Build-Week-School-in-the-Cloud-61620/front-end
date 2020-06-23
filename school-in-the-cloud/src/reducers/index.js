@@ -3,6 +3,7 @@ import {
   CREATE_USER_START,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE,
+  LOGIN_USER_START,
 } from "../actions";
 
 const initialState = {
@@ -12,14 +13,16 @@ const initialState = {
     username: "",
     email: "",
     password: "",
-    role: "student",
+    role: "",
     country: "",
-    tasks: ["Create study plan", "grade assignments"],
+    tasks: [],
     times: [],
   },
   error: "",
   success: "",
   creatingUser: false,
+  isLoggedIn: false,
+  isLoggingIn: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -34,6 +37,10 @@ export const reducer = (state = initialState, action) => {
       };
     case CREATE_USER_FAILURE:
       return { ...state, creatingUser: false, error: action.payload };
+    case LOGIN_USER_START:
+      return { ...state, isLoggingIn: true };
+    case LOGIN_USER_SUCCESS:
+      return { ...state, user: action.payload };
     default:
       return state;
   }

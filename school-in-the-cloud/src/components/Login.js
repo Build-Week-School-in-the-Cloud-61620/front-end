@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import axiosWithAuth from "../utils/axiosWithAuth";
 import {
   Button,
   Form,
@@ -14,9 +15,10 @@ import {
 import { loginUser } from "../actions";
 import RoleDropdown from "./RoleDropdown";
 
-const Login = () => {
+const Login = (props) => {
   //React-redux hook used to call dispatch from actions folder...
   const dispatch = useDispatch();
+  console.log(props.history);
 
   //Form state for login
   const [credentials, setCredentials] = useState({
@@ -34,15 +36,20 @@ const Login = () => {
   };
 
   //Submit handler to access application...
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(credentials));
-    setCredentials({ username: "", password: "", role: "" });
-    if(e.target.name === "role") {
-      setCredentials({...credentials, role: e.target.value.toLowerCase()})
-    }
+    dispatch(loginUser(credentials, props));
+    // axiosWithAuth()
+    //   .post(`/auth/login`, credentials)
+    //   .then((res) => {
+    //     console.log(res, res.data);
+    //     localStorage.setItem("token", res.data.token);
+    //     props.history.push("/protected");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
-  console.log(credentials);
 
   //Added functionality to form...
   return (
