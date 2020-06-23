@@ -23,12 +23,13 @@ function Home() {
         <div>
           <Link to="/admin">Admin Page</Link>
         </div>
+        <div>
+          <Link to="/todoList">ToDo List</Link>
+        </div>
         <br />
         <div>
           <Link to="/login">Login</Link>
         </div>
-       
-       
         <div>
           <Link to="/signup">Signup</Link>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input, Card, ListGroup, ListGroupItem, Table } from "reactstrap";
 import { Redirect } from "react-router-dom";
+import TodoList from "./TodoList";
 import Task from "./Task";
 
 function Volunteer(props) {
@@ -21,8 +22,17 @@ function Volunteer(props) {
       </h2>
     </Card>
 
+
     <Card>
       <legend>Tasks</legend>
+      
+    {/* BEG:*********************************************** */}
+    <Card >
+    <TodoList />
+    </Card>
+
+  {/* END:*********************************************** */}
+
       <Table hover>
       <thead>
         <tr>
@@ -38,6 +48,9 @@ function Volunteer(props) {
       </tbody>
     </Table>
     </Card>
+
+  
+
     </Form>
      : <Redirect to="/" />}
     </div>
