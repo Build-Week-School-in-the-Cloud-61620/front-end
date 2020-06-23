@@ -14,7 +14,7 @@ const initialState = {
     password: "",
     role: "student",
     country: "",
-    tasks: [],
+    tasks: ["Create study plan", "grade assignments"],
     times: [],
   },
   error: "",

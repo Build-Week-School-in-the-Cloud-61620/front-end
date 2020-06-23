@@ -17,6 +17,10 @@ export const FETCH_VOLUNTEERS_FAILURE = "FETCH_VOLUNTEERS_START";
 
 export const CREATE_AVAILABILITY = "CREATE_AVALIABILITY";
 
+export const FETCH_TODOS_START = "FETCH_TODOS_START";
+export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
+export const FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE";
+
 //Login user action, needs api call to hit db, but taking in data...
 export const loginUser = (credentials) => (dispatch) => {
   dispatch({ type: LOGIN_USER_START });
@@ -52,3 +56,13 @@ export const createUser = (user) => (dispatch) => {
       });
     });
 };
+
+// export const fetchTodos = () => dispatch => {
+
+// }
+
+// export const fetchTasks = (user) = (dispatch) => {
+//   dispatch({ type: FETCH_TODOS_START });
+//   dispatch({ type: FETCH_TODOS_SUCCESS, payload: user.tasks });
+
+// });
