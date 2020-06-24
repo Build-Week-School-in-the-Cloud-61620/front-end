@@ -1,7 +1,6 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 
-import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
+import { Form, Card } from "reactstrap";
 
 const Admin = (props) => {
   return (
