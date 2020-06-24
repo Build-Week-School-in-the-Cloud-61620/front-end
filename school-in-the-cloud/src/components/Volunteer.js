@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+
 import { Button, Form, FormGroup, Label, Input, Card, Col } from "reactstrap";
-import { Redirect } from "react-router-dom";
+
 import TodoList from "./TodoList";
-import axios from "axios";
-import Task from "./Task";
-const Volunteer = (props) => {
-  const [items, setItems] = useState([
-    {
-      text: "Grade papers",
-      isCompleted: false,
-    },
-    {
-      text: "write syllabus",
-      isCompleted: false,
-    },
-  ]);
+
+const tasks = [
+  {
+    text: "Grade papers",
+    isCompleted: false,
+  },
+  {
+    text: "write syllabus",
+    isCompleted: false,
+  },
+];
+
+const Volunteer = () => {
+  const [items, setItems] = useState([]);
   // const { user } = useSelector((state) => state);
+  useEffect(() => {
+    setItems(tasks);
+  }, []);
 
   return (
     <>

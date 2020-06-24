@@ -1,7 +1,4 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
-import axios from "axios";
-
-import { useHistory } from "react-router-dom";
 
 export const CREATE_USER_START = "CREATE_USER_START";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
@@ -22,6 +19,10 @@ export const CREATE_AVAILABILITY = "CREATE_AVALIABILITY";
 export const FETCH_TODOS_START = "FETCH_TODOS_START";
 export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
 export const FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE";
+
+export const ADD_TASK_START = "ADD_TASK_START";
+export const ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS";
+export const ADD_TASK_FAILURE = "ADD_TASK_FALIURE";
 
 //Login user action, needs api call to hit db, but taking in data...
 export const loginUser = (credentials, props) => (dispatch) => {
@@ -70,3 +71,11 @@ export const createUser = (user) => (dispatch) => {
 //   dispatch({ type: FETCH_TODOS_SUCCESS, payload: user.tasks });
 
 // });
+
+// export const addTask = (task) => dispatch => {
+//   dispatch({type: })
+// }
+
+// export const updateAvailabilty = ()
+
+// export const updateLocation =

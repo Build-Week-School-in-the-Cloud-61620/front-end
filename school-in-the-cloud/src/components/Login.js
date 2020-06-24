@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import axiosWithAuth from "../utils/axiosWithAuth";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Card,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-} from "reactstrap";
+
+import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 import { loginUser } from "../actions";
 import RoleDropdown from "./RoleDropdown";
 
