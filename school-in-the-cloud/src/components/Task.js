@@ -8,7 +8,6 @@ import {
   Card,
   ListGroupItem,
 } from "reactstrap";
-
 function Task(props) {
   // const  group2  = group;
   const renderAuthButton = () => {
@@ -18,7 +17,6 @@ function Task(props) {
       return <Button disabled>Complete</Button>;
     }
   };
-
   return (
     <tr>
       <td>{props.task}</td>
@@ -27,5 +25,4 @@ function Task(props) {
     </tr>
   );
 }
-
 export default Task;
