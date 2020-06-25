@@ -1,24 +1,30 @@
-
-import React, { useEffect} from "react";
-import { Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
+import { Form, Card } from "reactstrap";
+import { fetchVols } from "../actions";
+import VolunteerView from "./VolunteerView";
+import { Link } from "react-router-dom";
 
+const Admin = () => {
+  const dispatch = useDispatch();
+  const { volunteers } = useSelector((state) => state);
+  console.log("Admin view", volunteers);
 
-
-
-
-
-const Admin = (props) => {
-    console.log("YAAAAAAAAAAMMMMMMMSSSS")
-    useEffect(() => {
-      axiosWithAuth().get("/admin/volunteers/all").then(res => {
-        console.log(res);
-      }) 
-      .catch((error) => {
-        console.log("error", error);
-      })
-    }, []);
+  useEffect(() => {
+    dispatch(fetchVols());
+  }, []);
+  // console.log("YAAAAAAAAAAMMMMMMMSSSS");
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get("/admin/volunteer/all")
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log("error", error);
+  //     });
+  // }, []);
 
   return (
     <div>
@@ -30,7 +36,22 @@ const Admin = (props) => {
         </Card>
 
         {/* BEG:**************************************************************************************************** */}
-        <Card></Card>
+        <Card color="" style={{ background: "#87CEFA" }}>
+          <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Volunteers</h2>
+          <ul></ul>
+          {volunteers.map((vol) => {
+            return (
+              <Link
+                key={vol.id}
+                to={{ pathname: "/volunteer-view", volId: vol.id }}
+              >
+                <li key={vol.id} volunteer={vol}>
+                  {vol.name}
+                </li>
+              </Link>
+            );
+          })}
+        </Card>
 
         {/* END:**************************************************************************************************** */}
       </Form>
