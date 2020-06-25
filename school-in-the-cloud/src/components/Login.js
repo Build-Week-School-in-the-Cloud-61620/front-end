@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Card,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+} from "reactstrap";
+import { AvForm, AvField, AvGroup } from 'availity-reactstrap-validation';
+
+
+
+
 import { loginUser } from "../actions";
 import RoleDropdown from "./RoleDropdown";
 
@@ -43,33 +59,36 @@ const Login = (props) => {
 
   //Added functionality to form...
   return (
-    <Form onSubmit={handleSubmit} style={{ margin: "15%" }}>
+    <AvForm onSubmit={handleSubmit} style={{ margin: "15%" }}>
       <Card color="" style={{ background: "#87CEFA" }}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Login Here!</h2>
       </Card>
-      <FormGroup>
-        <Label for="username">User Name</Label>
-        <Input
+      <AvGroup>
+        
+        <AvField
           type="text"
           name="username"
           id="username"
           placeholder="Enter user name"
           onChange={handleChanges}
           value={username}
+          label="UserName" required
+          
         />
-      </FormGroup>
+      </AvGroup>
 
-      <FormGroup>
-        <Label for="password">Password</Label>
-        <Input
+      <AvGroup>
+       
+        <AvField
           type="password"
           name="password"
           id="password"
           placeholder="Password Here"
           onChange={handleChanges}
           value={password}
+          label="Password" required
         />
-      </FormGroup>
+      </AvGroup>
       {/* Added select component from reactstrap to add role to login form*/}
       {/* <FormGroup>
         <Label for="exampleSelect">Select</Label>
@@ -88,7 +107,7 @@ const Login = (props) => {
       <RoleDropdown value={role} onChange={handleChanges} />
 
       <Button type="submit">Submit</Button>
-    </Form>
+    </AvForm>
   );
 };
 

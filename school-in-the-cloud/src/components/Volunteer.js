@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import { Button, Form, FormGroup, Label, Input, Card, Col } from "reactstrap";
 
+import { Redirect } from "react-router-dom";
+import { AvForm, AvField, AvGroup } from 'availity-reactstrap-validation';
 import TodoList from "./TodoList";
+import axios from "axios";
+import Task from "./Task";
+
+
+
+
 
 const tasks = [
   {
@@ -25,7 +33,7 @@ const Volunteer = () => {
   return (
     <>
       <div>
-        <Form style={{ margin: "15%" }}>
+        <AvForm style={{ margin: "15%" }}>
           <Card color="" style={{ background: "#87CEFA" }}>
             <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>
               I'm an Volunteer!
@@ -39,9 +47,9 @@ const Volunteer = () => {
             </Card>
             {/* END:*********************************************** */}
           </Card>
-          <FormGroup>
-            <Label for="days">Select Day you are available</Label>
-            <Input type="select" name="days" id="days" multiple>
+          <AvGroup>
+          
+            <AvField type="select" name="days" id="days" multiple label="Select Your Day of Availablity">
               <option>Monday</option>
               <option>Tuesday</option>
               <option>Wednesday</option>
@@ -49,11 +57,11 @@ const Volunteer = () => {
               <option>Friday</option>
               <option>Saturday</option>
               <option>Sunday</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="Hours">Select Hours you are available</Label>
-            <Input type="select" name="hours" id="hour" multiple>
+            </AvField>
+          </AvGroup>
+          <AvGroup>
+            
+            <AvField type="select" name="hours" id="hour" multiple label="Select Your Hours of Availablity">
               <option>9am - 10pm</option>
               <option>11am - 12pm</option>
               <option>1pm - 2pm</option>
@@ -61,25 +69,24 @@ const Volunteer = () => {
               <option>5pm - 6pm</option>
               <option>7pm - 8pm</option>
               <option>9pm - 10pm</option>
-            </Input>
-          </FormGroup>
-          <FormGroup row style={{ color: "slategray" }}>
-            <Label for="locationSelect" sm={2}>
-              Location
-            </Label>
+            </AvField>
+          </AvGroup>
+          <AvGroup row style={{ color: "slategray" }}>
+           
             <Col sm={10}>
-              <Input type="select" name="location" id="locationSelect">
+              <AvField type="select" name="location" id="locationSelect" label="Location" sm={2}>
                 <option>United States</option>
                 <option>United Kingdom</option>
-              </Input>
+              </AvField>
             </Col>
-          </FormGroup>
+          </AvGroup>
           <Button style={{ color: "whitesmoke", background: " #00BFFF" }}>
             Select
           </Button>
-        </Form>
+        </AvForm>
       </div>
     </>
   );
 };
 export default Volunteer;
+
