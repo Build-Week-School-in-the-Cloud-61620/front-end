@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
-import axiosWithAuth from "../utils/axiosWithAuth";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Card,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-} from "reactstrap";
-import { AvForm, AvField, AvGroup } from 'availity-reactstrap-validation';
-
-
-
-
+import { Button, Card } from "reactstrap";
+import { AvForm, AvField, AvGroup } from "availity-reactstrap-validation";
 import { loginUser } from "../actions";
 import RoleDropdown from "./RoleDropdown";
 
@@ -64,7 +48,6 @@ const Login = (props) => {
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Login Here!</h2>
       </Card>
       <AvGroup>
-        
         <AvField
           type="text"
           name="username"
@@ -72,13 +55,12 @@ const Login = (props) => {
           placeholder="Enter user name"
           onChange={handleChanges}
           value={username}
-          label="UserName" required
-          
+          label="UserName"
+          required
         />
       </AvGroup>
 
       <AvGroup>
-       
         <AvField
           type="password"
           name="password"
@@ -86,7 +68,8 @@ const Login = (props) => {
           placeholder="Password Here"
           onChange={handleChanges}
           value={password}
-          label="Password" required
+          label="Password"
+          required
         />
       </AvGroup>
       {/* Added select component from reactstrap to add role to login form*/}

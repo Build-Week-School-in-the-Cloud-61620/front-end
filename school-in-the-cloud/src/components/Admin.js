@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axiosWithAuth from "../utils/axiosWithAuth";
+
 import { Form, Card } from "reactstrap";
 import { fetchVols } from "../actions";
-import VolunteerView from "./VolunteerView";
 import { Link } from "react-router-dom";
 
 const Admin = () => {
   const dispatch = useDispatch();
   const { volunteers } = useSelector((state) => state);
-  console.log("Admin view", volunteers);
-
+  
   useEffect(() => {
     dispatch(fetchVols());
   }, []);

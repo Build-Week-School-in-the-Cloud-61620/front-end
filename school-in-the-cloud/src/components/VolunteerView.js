@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { fetchVolTasksAsAdmin } from "../actions";
-import { Button, Card, Col } from "reactstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { AvForm, AvField, AvGroup } from "availity-reactstrap-validation";
+import React from "react";
+
+import { Card } from "reactstrap";
+import { AvForm } from "availity-reactstrap-validation";
 import TodoList from "./TodoList";
 
 const VolunteerView = (props) => {
