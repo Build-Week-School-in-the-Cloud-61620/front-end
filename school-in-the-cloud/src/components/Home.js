@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
+import { Form, Card } from "reactstrap";
 
 function Home() {
   return (

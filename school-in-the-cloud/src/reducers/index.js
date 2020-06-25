@@ -23,6 +23,8 @@ const initialState = {
   creatingUser: false,
   isLoggedIn: false,
   isLoggingIn: false,
+  isAdding: false,
+  isUpdating: false,
 };
 
 export const reducer = (state = initialState, action) => {
