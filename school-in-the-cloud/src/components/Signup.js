@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button, Form, FormGroup, Label, Input, Card, Col } from "reactstrap";
 import RoleDropdown from "./RoleDropdown";
 import { createUser } from "../actions";
 
 const Signup = () => {
   //Setting state for creating a user...
+
   const [user, setUser] = useState({
     username: "",
     name: "",
@@ -14,8 +15,6 @@ const Signup = () => {
     password: "",
     role: "admin",
   });
-
-  
 
   //User object destructured...
   const { username, email, role, password, name } = user;
@@ -43,65 +42,69 @@ const Signup = () => {
     });
   };
   return (
-    <AvForm onSubmit={handleSubmit} style={{ margin: "10%"}}>
-
-    <Card color="" style={{ background: "#87CEFA" }}>
+    <AvForm onSubmit={handleSubmit} style={{ margin: "10%" }}>
+      <Card color="" style={{ background: "#87CEFA" }}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Sign Up Here!</h2>
       </Card>
-    {/* With AvField */}
-    <AvField 
-        type="name" 
-        name="name" 
+      {/* With AvField */}
+      <AvField
+        type="name"
+        name="name"
         id="name"
         placeholder="First/Last Name"
         value={name}
-        onChange={handleChanges} 
-        label="Name" required 
-          />
-    <AvField 
+        onChange={handleChanges}
+        label="Name"
+        required
+      />
+      <AvField
         type="email"
         name="email"
         id="email"
         placeholder="Email Here"
         value={email}
         onChange={handleChanges}
-        label="Email" required />
-    <AvField 
+        label="Email"
+        required
+      />
+      <AvField
         type="text"
         name="username"
         id="username"
         placeholder="Username"
         value={username}
         onChange={handleChanges}
-        label="username" required />
+        label="username"
+        required
+      />
 
-
-
-    <AvField 
+      <AvField
         type="password"
         name="password"
         id="password"
         placeholder="Password Here"
         value={password}
         onChange={handleChanges}
-        label="password" required />
+        label="password"
+        required
+      />
 
-    <RoleDropdown value={role} onChange={handleChanges} />
+      <RoleDropdown value={role} onChange={handleChanges} />
 
-    {/* With select and AvField */}
-    <AvField 
-        type="select" 
-        name="location" 
-        onChange={handleChanges} 
-        label="Location" >
-      <option>US</option>
-      <option>UK</option>
-    </AvField>
+      {/* With select and AvField */}
+      <AvField
+        type="select"
+        name="location"
+        onChange={handleChanges}
+        label="Location"
+      >
+        <option>US</option>
+        <option>UK</option>
+      </AvField>
 
-    <FormGroup>
-      <Button>Submit</Button>
-    </FormGroup>
-
+      <FormGroup>
+        <Button>Submit</Button>
+      </FormGroup>
     </AvForm>
   );
 };
