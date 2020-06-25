@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
+import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { Button, Form, FormGroup, Label, Input, Card, Col } from "reactstrap";
 import RoleDropdown from "./RoleDropdown";
 import { createUser } from "../actions";
 
@@ -13,6 +14,8 @@ const Signup = () => {
     password: "",
     role: "admin",
   });
+
+  
 
   //User object destructured...
   const { username, email, role, password, name } = user;
@@ -40,61 +43,66 @@ const Signup = () => {
     });
   };
   return (
-    <Form onSubmit={handleSubmit} style={{ margin: "15%" }}>
-      <Card color="" style={{ background: "#87CEFA" }}>
+    <AvForm onSubmit={handleSubmit} style={{ margin: "10%"}}>
+
+    <Card color="" style={{ background: "#87CEFA" }}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Sign Up Here!</h2>
       </Card>
-      <FormGroup>
-        <Label for="name">Name</Label>
-        <Input
-          type="name"
-          name="name"
-          id="name"
-          placeholder="First/Last Name"
-          value={name}
-          onChange={handleChanges}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email Here"
-          value={email}
-          onChange={handleChanges}
-        />
-      </FormGroup>
+    {/* With AvField */}
+    <AvField 
+        type="name" 
+        name="name" 
+        id="name"
+        placeholder="First/Last Name"
+        value={name}
+        onChange={handleChanges} 
+        label="Name" required 
+          />
+    <AvField 
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email Here"
+        value={email}
+        onChange={handleChanges}
+        label="Email" required />
+    <AvField 
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Username"
+        value={username}
+        onChange={handleChanges}
+        label="username" required />
 
-      <FormGroup>
-        <Label for="username">User Name</Label>
-        <Input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Username"
-          value={username}
-          onChange={handleChanges}
-        />
-      </FormGroup>
 
-      <FormGroup>
-        <Label for="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password Here"
-          value={password}
-          onChange={handleChanges}
-        />
-      </FormGroup>
 
-      <RoleDropdown value={role} onChange={handleChanges} />
+    <AvField 
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password Here"
+        value={password}
+        onChange={handleChanges}
+        label="password" required />
 
-      <Button type="submit">Submit</Button>
-    </Form>
+    <RoleDropdown value={role} onChange={handleChanges} />
+
+    {/* With select and AvField */}
+    <AvField 
+        type="select" 
+        name="location" 
+        onChange={handleChanges} 
+        label="Location" >
+      <option>US</option>
+      <option>UK</option>
+    </AvField>
+
+    <FormGroup>
+      <Button>Submit</Button>
+    </FormGroup>
+
+    </AvForm>
   );
 };
 
