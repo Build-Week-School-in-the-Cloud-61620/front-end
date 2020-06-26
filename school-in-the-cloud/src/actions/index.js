@@ -116,11 +116,11 @@ export const fetchVolTasksAsAdmin = (id) => (dispatch) => {
     .get(`/admin/volunteer/${id}/tasks`)
     .then((res) => {
       dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_SUCCESS, payload: res.data });
-      console.log(res);
+      console.log("*****task array*****", res);
     })
     .catch((err) => {
       dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_FAILURE });
-      console.log(err);
+      console.log("err for failure******", err);
     });
 };
 
@@ -131,8 +131,8 @@ export const addVolTasksAsAdmin = (adminId, volId, task) => (dispatch) => {
   axiosWithAuth()
     .post(`/admin/${adminId}/tasks/${volId}`, task)
     .then((res) => {
+      console.log("actions js 135", res);
       dispatch({ type: ADD_VOLTASKS_AS_ADMIN_SUCCESS });
-      console.log(res);
     })
     .catch((err) => {
       dispatch({ type: ADD_VOLTASKS_AS_ADMIN_FAILURE, payload: err });
@@ -160,7 +160,7 @@ export const deleteTasksAsAdmin = (id) => (dispatch) => {
   axiosWithAuth()
     .delete(`/admin/${id}/tasks`)
     .then((res) => {
-      dispatch({ type: DELETE_VOLTASKS_AS_ADMIN_SUCCESS });
+      dispatch({ type: DELETE_VOLTASKS_AS_ADMIN_SUCCESS, payload: id });
       console.log(res);
     })
     .catch((err) => {

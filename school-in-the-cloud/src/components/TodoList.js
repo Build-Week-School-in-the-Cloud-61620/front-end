@@ -10,9 +10,9 @@ import { addVolTasksAsAdmin } from "../actions";
 const TodoList = (props) => {
   const dispatch = useDispatch();
   const { tasks, user } = useSelector((state) => state);
-  console.log(tasks);
+  // console.log(tasks);
 
-  console.log("TodoForm", user, props.volId);
+  // console.log("TodoForm", user, props.volId);
 
   const [task, setTask] = useState({ description: "", completed: 0 });
   const handleSubmit = (e) => {
@@ -29,6 +29,8 @@ const TodoList = (props) => {
   };
 
   useEffect(() => {
+    console.log("volid in useeffect", props.volId);
+
     dispatch(fetchVolTasksAsAdmin(props.volId));
   }, []);
 
@@ -65,9 +67,10 @@ const TodoList = (props) => {
             </Button>
           </FormGroup>
         </Form>
-        {tasks.map((task) => (
-          <Todo key={task.id} todo={task} />
-        ))}
+        {
+          (console.log("TodoList", tasks),
+          tasks.map((task) => <Todo key={task.id} todo={task} />))
+        }
       </div>
     </div>
   );

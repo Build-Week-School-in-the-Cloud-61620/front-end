@@ -1,8 +1,16 @@
 import React from "react";
 import "./TodoList.css";
 import { Button } from "reactstrap";
+import { useDispatch } from "react-redux";
+import { updateTaskAsAdmin, deleteTasksAsAdmin } from "../actions";
 
 const Todo = ({ todo }) => {
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch(deleteTasksAsAdmin(id));
+  };
+
+  const handleUpdate = (e) => {};
   return (
     <div
       className="todo"
@@ -20,7 +28,9 @@ const Todo = ({ todo }) => {
         </Button>
         <Button
           style={{ color: "whitesmoke", background: " #00BFFF" }}
-          onClick={""}
+          onClick={() => {
+            handleDelete(todo.id);
+          }}
         >
           Delete
         </Button>
