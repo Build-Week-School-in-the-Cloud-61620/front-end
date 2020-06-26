@@ -17,6 +17,9 @@ import {
   ADD_VOLTASKS_AS_ADMIN_START,
   ADD_VOLTASKS_AS_ADMIN_SUCCESS,
   ADD_VOLTASKS_AS_ADMIN_FAILURE,
+  DELETE_VOLTASKS_AS_ADMIN_FAILURE,
+  DELETE_VOLTASKS_AS_ADMIN_SUCCESS,
+  DELETE_VOLTASKS_AS_ADMIN_START,
 } from "../actions";
 
 const initialState = {
@@ -100,6 +103,12 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isAdding: false };
     case ADD_VOLTASKS_AS_ADMIN_FAILURE:
       return { ...state, isAdding: false, error: action.payload };
+    case DELETE_VOLTASKS_AS_ADMIN_START:
+      return { ...state, isDeleting: true, error: "" };
+    case DELETE_VOLTASKS_AS_ADMIN_SUCCESS:
+      return { ...state, isDeleting: false, error: "" };
+    case DELETE_VOLTASKS_AS_ADMIN_FAILURE:
+      return { ...state, isDeleting: false, error: action.payload };
     default:
       return state;
   }

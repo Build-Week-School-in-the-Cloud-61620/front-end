@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./TodoList.css";
-import { Form, FormGroup, Input } from "reactstrap";
+import { Form, FormGroup, Input, Button } from "reactstrap";
 // import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import { useSelector, useDispatch } from "react-redux";
@@ -56,6 +56,13 @@ const TodoList = (props) => {
               value={description}
               onChange={handleChange}
             />
+            <Button
+              style={{ color: "whitesmoke", background: " #00BFFF" }}
+              onClick={""}
+              type="submit"
+            >
+              Submit
+            </Button>
           </FormGroup>
         </Form>
         {tasks.map((task) => (

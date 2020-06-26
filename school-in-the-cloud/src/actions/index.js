@@ -141,5 +141,30 @@ export const addVolTasksAsAdmin = (adminId, volId, task) => (dispatch) => {
 };
 
 //Update task as admin
-
+export const updateTaskAsAdmin = (id, task) => (dispatch) => {
+  dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_START });
+  axiosWithAuth()
+    .put(`/admin/${id}/tasks`, task)
+    .then((res) => {
+      dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_SUCCESS });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_FAILURE });
+      console.log(err);
+    });
+};
 //Delete tasks as admin
+export const deleteTasksAsAdmin = (id) => (dispatch) => {
+  dispatch({ type: DELETE_VOLTASKS_AS_ADMIN_START });
+  axiosWithAuth()
+    .delete(`/admin/${id}/tasks`)
+    .then((res) => {
+      dispatch({ type: DELETE_VOLTASKS_AS_ADMIN_SUCCESS });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: DELETE_VOLTASKS_AS_ADMIN_FAILURE });
+      console.log(err);
+    });
+};
