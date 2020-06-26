@@ -14,6 +14,31 @@ const Admin = (props) => {
         console.log("error", error);
       })
     }, []);
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { Form, Card } from "reactstrap";
+import { fetchVols } from "../actions";
+import { Link } from "react-router-dom";
+
+const Admin = () => {
+  const dispatch = useDispatch();
+  const { volunteers } = useSelector((state) => state);
+  
+  useEffect(() => {
+    dispatch(fetchVols());
+  }, []);
+  // console.log("YAAAAAAAAAAMMMMMMMSSSS");
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get("/admin/volunteer/all")
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log("error", error);
+  //     });
+  // }, []);
 
   return (
     <div>
@@ -25,7 +50,22 @@ const Admin = (props) => {
         </Card>
 
         {/* BEG:**************************************************************************************************** */}
-        <Card></Card>
+        <Card color="" style={{ background: "#87CEFA" }}>
+          <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Volunteers</h2>
+          <ul></ul>
+          {volunteers.map((vol) => {
+            return (
+              <Link
+                key={vol.id}
+                to={{ pathname: "/volunteer-view", volId: vol.id }}
+              >
+                <li key={vol.id} volunteer={vol}>
+                  {vol.name}
+                </li>
+              </Link>
+            );
+          })}
+        </Card>
 
         {/* END:**************************************************************************************************** */}
       </Form>
@@ -33,5 +73,6 @@ const Admin = (props) => {
     </div>
   );
 };
+
 
 export default Admin;

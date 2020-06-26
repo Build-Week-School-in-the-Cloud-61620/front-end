@@ -1,7 +1,4 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
-import axios from "axios";
-
-import { useHistory } from "react-router-dom";
 
 export const CREATE_USER_START = "CREATE_USER_START";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
@@ -17,11 +14,35 @@ export const FETCH_VOLUNTEERS_START = "FETCH_VOLUNTEERS_START";
 export const FETCH_VOLUNTEERS_SUCCESS = "FETCH_VOLUNTEERS_SUCCESS";
 export const FETCH_VOLUNTEERS_FAILURE = "FETCH_VOLUNTEERS_START";
 
-export const CREATE_AVAILABILITY = "CREATE_AVALIABILITY";
-
 export const FETCH_TODOS_START = "FETCH_TODOS_START";
 export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
 export const FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE";
+
+export const FETCH_VOLUNTEER_START = "FETCH_VOLUNTEER_START";
+export const FETCH_VOLUNTEER_SUCCESS = "FETCH_VOLUNTEER_SUCCESS";
+export const FETCH_VOLUNTEER_FAILURE = "FETCH_VOLUNTEER_START";
+
+export const FETCH_VOLTASKS_AS_ADMIN_START = "FETCH_VOLTASKS_AS_ADMIN_START";
+export const FETCH_VOLTASKS_AS_ADMIN_SUCCESS =
+  "FETCH_VOLTASKS_AS_ADMIN_SUCCESS";
+export const FETCH_VOLTASKS_AS_ADMIN_FAILURE =
+  "FETCH_VOLTASKS_AS_ADMIN_FAILURE";
+
+export const ADD_VOLTASKS_AS_ADMIN_START = "ADD_VOLTASKS_AS_ADMIN_START";
+export const ADD_VOLTASKS_AS_ADMIN_SUCCESS = "FETCH_VOLTASKS_AS_ADMIN_SUCCESS";
+export const ADD_VOLTASKS_AS_ADMIN_FAILURE = "FETCH_VOLTASKS_AS_ADMIN_FAILURE";
+
+export const UPDATE_VOLTASKS_AS_ADMIN_START = "UPDATE_VOLTASKS_AS_ADMIN_START";
+export const UPDATE_VOLTASKS_AS_ADMIN_SUCCESS =
+  "FETCH_VOLTASKS_AS_ADMIN_SUCCESS";
+export const UPDATE_VOLTASKS_AS_ADMIN_FAILURE =
+  "FETCH_VOLTASKS_AS_ADMIN_FAILURE";
+
+export const DELETE_VOLTASKS_AS_ADMIN_START = "DELETE_VOLTASKS_AS_ADMIN_START";
+export const DELETE_VOLTASKS_AS_ADMIN_SUCCESS =
+  "DELETE_VOLTASKS_AS_ADMIN_SUCCESS";
+export const DELETE_VOLTASKS_AS_ADMIN_FAILURE =
+  "DELETE_VOLTASKS_AS_ADMIN_FAILURE";
 
 //Login user action, needs api call to hit db, but taking in data...
 export const loginUser = (credentials, props) => (dispatch) => {
@@ -61,12 +82,64 @@ export const createUser = (user) => (dispatch) => {
     });
 };
 
-// export const fetchTodos = () => dispatch => {
+export const fetchVol = (id) => (dispatch) => {
+  dispatch({ type: FETCH_VOLUNTEER_START });
+  axiosWithAuth()
+    .get(`/admin/volunteer/${id}`)
+    .then((res) => {
+      // console.log(res.data);
+      dispatch({ type: FETCH_VOLUNTEERS_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      // console.log(err.message);
+      dispatch({ type: FETCH_VOLUNTEERS_FAILURE, payload: err.message });
+    });
+};
 
-// }
+export const fetchVols = () => (dispatch) => {
+  dispatch({ type: FETCH_VOLUNTEERS_START });
+  axiosWithAuth()
+    .get("/admin/volunteer/all")
+    .then((res) => {
+      // console.log(res.data);
+      dispatch({ type: FETCH_VOLUNTEERS_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      // console.log(err.message);
+      dispatch({ type: FETCH_VOLUNTEERS_FAILURE, payload: err.message });
+    });
+};
 
-// export const fetchTasks = (user) = (dispatch) => {
-//   dispatch({ type: FETCH_TODOS_START });
-//   dispatch({ type: FETCH_TODOS_SUCCESS, payload: user.tasks });
+export const fetchVolTasksAsAdmin = (id) => (dispatch) => {
+  dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_START });
+  axiosWithAuth()
+    .get(`/admin/volunteer/${id}/tasks`)
+    .then((res) => {
+      dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_SUCCESS, payload: res.data });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_FAILURE });
+      console.log(err);
+    });
+};
 
-// });
+//Add task as admin
+export const addVolTasksAsAdmin = (adminId, volId, task) => (dispatch) => {
+  dispatch({ type: ADD_VOLTASKS_AS_ADMIN_START });
+  console.log("task in add task action: ", task);
+  axiosWithAuth()
+    .post(`/admin/${adminId}/tasks/${volId}`, task)
+    .then((res) => {
+      dispatch({ type: ADD_VOLTASKS_AS_ADMIN_SUCCESS });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: ADD_VOLTASKS_AS_ADMIN_FAILURE, payload: err });
+      console.log(err);
+    });
+};
+
+//Update task as admin
+
+//Delete tasks as admin

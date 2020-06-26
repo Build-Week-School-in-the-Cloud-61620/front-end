@@ -10,7 +10,7 @@ import {
   Input,
   Col,
 } from "reactstrap";
-import { Redirect } from "react-router-dom";
+
 
 const Student = (props) => {
   return (
