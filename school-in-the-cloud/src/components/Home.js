@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <Form style={{ margin: "5%" }}>
-        <Card color="" style={{ background: "#87CEFA" }}>
+        <Card color="" style={{ background: "#209cee" }}>
           <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>
             Welcome to the Home Page!
           </h2>
