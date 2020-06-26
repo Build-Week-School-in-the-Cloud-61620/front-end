@@ -119,7 +119,7 @@ export const fetchVolTasksAsAdmin = (id) => (dispatch) => {
       console.log("*****task array*****", res);
     })
     .catch((err) => {
-      dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_FAILURE });
+      dispatch({ type: FETCH_VOLTASKS_AS_ADMIN_FAILURE, payload: err });
       console.log("err for failure******", err);
     });
 };
@@ -141,17 +141,21 @@ export const addVolTasksAsAdmin = (adminId, volId, task) => (dispatch) => {
 };
 
 //Update task as admin
-export const updateTaskAsAdmin = (id, task) => (dispatch) => {
+export const updateTaskAsAdmin = (todo, task) => (dispatch) => {
+  const newTodo = { ...todo, description: task };
   dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_START });
   axiosWithAuth()
-    .put(`/admin/${id}/tasks`, task)
+    .put(`/admin/${todo.id}/tasks`, newTodo)
     .then((res) => {
-      dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_SUCCESS });
-      console.log(res);
+      console.log("***PUT req", res.config.data);
+      dispatch({
+        type: UPDATE_VOLTASKS_AS_ADMIN_SUCCESS,
+        payload: JSON.parse(res.config.data),
+      });
     })
     .catch((err) => {
       dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_FAILURE });
-      console.log(err);
+      console.log("***PUT req error", err);
     });
 };
 //Delete tasks as admin

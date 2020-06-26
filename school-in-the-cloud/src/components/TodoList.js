@@ -29,10 +29,10 @@ const TodoList = (props) => {
   };
 
   useEffect(() => {
-    console.log("volid in useeffect", props.volId);
+    console.log("use effect called", props.volId);
 
     dispatch(fetchVolTasksAsAdmin(props.volId));
-  }, []);
+  }, [props.volId]);
 
   // const completeTodo = (index) => {
   //   const newTodos = [...todos];
@@ -60,16 +60,29 @@ const TodoList = (props) => {
             />
             <Button
               style={{ color: "whitesmoke", background: " #00BFFF" }}
-              onClick={""}
               type="submit"
             >
               Submit
+            </Button>
+            <Button
+              style={{ color: "whitesmoke", background: " #00BFFF" }}
+              onClick={() => {}}
+              type="submit"
+            >
+              Submit Update
             </Button>
           </FormGroup>
         </Form>
         {
           (console.log("TodoList", tasks),
-          tasks.map((task) => <Todo key={task.id} todo={task} />))
+          tasks.map((t) => (
+            <Todo
+              key={t.id}
+              todo={t}
+              setTask={setTask}
+              task={task.description}
+            />
+          )))
         }
       </div>
     </div>

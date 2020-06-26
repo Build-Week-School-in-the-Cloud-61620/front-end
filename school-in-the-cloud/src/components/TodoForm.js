@@ -12,7 +12,7 @@ const TodoForm = ({ volId }) => {
   const { user } = useSelector((state) => state);
   console.log("TodoForm", user, volId);
   const dispatch = useDispatch();
-  const [task, setTask] = useState({ description: "", completed: 0 });
+  // const [task, setTask] = useState({ description: "", completed: 0 });
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addVolTasksAsAdmin(user.id, volId, task));
