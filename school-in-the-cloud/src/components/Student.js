@@ -17,7 +17,7 @@ const Student = (props) => {
     <>
       <div>
         <Form style={{ margin: "15%" }}>
-          <Card color="" style={{ background: "#87CEFA" }}>
+          <Card color="" style={{ background: "#209cee" }}>
             <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>
               I'm an Student!
             </h2>

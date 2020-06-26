@@ -55,7 +55,7 @@ const Login = (props) => {
   //Added functionality to form...
   return (
     <AvForm onSubmit={handleSubmit} style={{ margin: "15%" }}>
-      <Card color="" style={{ background: "#87CEFA" }}>
+      <Card color="" style={{ background: "#209cee" }}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Login Here!</h2>
       </Card>
       <AvGroup>

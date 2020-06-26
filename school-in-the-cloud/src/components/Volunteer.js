@@ -20,15 +20,45 @@ const tasks = [
 const Volunteer = () => {
   const [items, setItems] = useState([]);
   // const { user } = useSelector((state) => state);
+
+  const [volunteer, setVolunteer] = useState({
+    days: '',
+    hours: '',
+    location: '',
+  });
+
+  const {days, hours, location} = volunteer;
+
+
+  const handleChanges = (e) => {
+    setVolunteer({...volunteer,
+        [e.target.name]:
+          e.target.value
+        });
+  };
+
+  console.log(volunteer);
+
+  const handleSubmit = (e) => {
+    e.persist();
+    setVolunteer({
+      days: '',
+      hours: '',
+      location: '',
+    });
+  };
+
   useEffect(() => {
     setItems(tasks);
   }, []);
 
+
+
   return (
     <>
       <div>
-        <AvForm style={{ margin: "15%" }}>
-          <Card color="" style={{ background: "#87CEFA" }}>
+        <AvForm onSubmit={handleSubmit} style={{ margin: "15%" }}>
+          <Card color="" style={{ background: "#209cee" }}>
             <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>
               I'm an Volunteer!
             </h2>
@@ -43,7 +73,7 @@ const Volunteer = () => {
           </Card>
           <AvGroup>
           
-            <AvField type="select" name="days" id="days" multiple label="Select Your Day of Availablity">
+            <AvField type="select" name="days" onChange={handleChanges} value={days}  id="days" multiple label="Select Your Day of Availablity">
               <option>Monday</option>
               <option>Tuesday</option>
               <option>Wednesday</option>
@@ -55,7 +85,7 @@ const Volunteer = () => {
           </AvGroup>
           <AvGroup>
             
-            <AvField type="select" name="hours" id="hour" multiple label="Select Your Hours of Availablity">
+            <AvField type="select" name="hours" onChange={handleChanges} value={hours} id="hour" multiple label="Select Your Hours of Availablity">
               <option>9am - 10pm</option>
               <option>11am - 12pm</option>
               <option>1pm - 2pm</option>
@@ -68,7 +98,7 @@ const Volunteer = () => {
           <AvGroup row style={{ color: "slategray" }}>
            
             <Col sm={10}>
-              <AvField type="select" name="location" id="locationSelect" label="Location" sm={2}>
+              <AvField type="select" name="location" onChange={handleChanges} value={location} id="locationSelect" label="Location" sm={2}>
                 <option>United States</option>
                 <option>United Kingdom</option>
               </AvField>

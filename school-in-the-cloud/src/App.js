@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Volunteer from './components/Volunteer';
 import Dashboard from "./components/Dashboard";
+import Admin from "./components/Admin";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/volunteer" component={Volunteer} />
+        <Route path="/admin" component={Admin} />
       
        
        
