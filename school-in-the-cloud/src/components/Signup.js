@@ -4,6 +4,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button, FormGroup, Card, } from "reactstrap";
 import RoleDropdown from "./RoleDropdown";
 import { createUser } from "../actions";
+import { axios } from "axios";
 
 const Signup = () => {
   //Setting state for creating a user...
@@ -16,6 +17,7 @@ const Signup = () => {
     role: "admin",
   });
 
+  
   //User object destructured...
   const { username, email, role, password, name } = user;
 
@@ -42,6 +44,9 @@ const Signup = () => {
     });
   };
   return (
+    <AvForm onSubmit={handleSubmit} style={{ margin: "10%"}}>
+
+    <Card color="" style={{ background: "#209cee" }}>
     <AvForm onSubmit={handleSubmit} style={{ margin: "10%" }}>
       <Card color="" style={{ background: "#87CEFA" }}>
         <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>Sign Up Here!</h2>
