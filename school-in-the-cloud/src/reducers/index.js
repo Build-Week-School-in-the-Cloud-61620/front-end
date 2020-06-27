@@ -1,16 +1,23 @@
 import {
+  //Create user actions...
   CREATE_USER_START,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE,
+
+  //Login user actions...
   LOGIN_USER_START,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
+
+  //Fetch volunteers...
   FETCH_VOLUNTEERS_START,
   FETCH_VOLUNTEERS_SUCCESS,
   FETCH_VOLUNTEERS_FAILURE,
   FETCH_VOLUNTEER_START,
   FETCH_VOLUNTEER_SUCCESS,
   FETCH_VOLUNTEER_FAILURE,
+
+  //Handling tasks as admin...
   FETCH_VOLTASKS_AS_ADMIN_FAILURE,
   FETCH_VOLTASKS_AS_ADMIN_SUCCESS,
   FETCH_VOLTASKS_AS_ADMIN_START,
@@ -25,7 +32,7 @@ import {
   UPDATE_VOLTASKS_AS_ADMIN_FAILURE,
 } from "../actions";
 
-const initialState = {
+export const initialState = {
   user: {
     id: null,
     name: "",
@@ -73,7 +80,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         creatingUser: false,
-        success: "User created successfully. Please login",
+        success: "User created successfully.",
       };
     case CREATE_USER_FAILURE:
       return { ...state, creatingUser: false, error: action.payload };
@@ -151,3 +158,4 @@ export const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
