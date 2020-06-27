@@ -68,13 +68,6 @@ const TodoList = (props) => {
             >
               Submit
             </Button>
-            <Button
-              style={{ color: "whitesmoke", background: " #00BFFF" }}
-              onClick={() => {}}
-              type="submit"
-            >
-              Submit Update
-            </Button>
           </FormGroup>
         </Form>
         {

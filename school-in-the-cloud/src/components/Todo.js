@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TodoList.css";
 import { Button } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { updateTaskAsAdmin, deleteTasksAsAdmin } from "../actions";
 
 const Todo = ({ todo, setTask, task, clearInput }) => {
+  const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
-    dispatch(deleteTasksAsAdmin());
+    dispatch(deleteTasksAsAdmin(id));
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
     dispatch(updateTaskAsAdmin(todo, task));
     clearInput();
+    setIsEditing(false);
   };
   return (
     <div
@@ -38,15 +40,17 @@ const Todo = ({ todo, setTask, task, clearInput }) => {
         <Button
           style={{ color: "whitesmoke", background: " #00BFFF" }}
           onClick={() => {
-            //Set state of input to task value
             setTask(todo);
-            //
+            setIsEditing(true);
           }}
         >
           Edit
         </Button>
         <Button
-          style={{ color: "whitesmoke", background: " #00BFFF" }}
+          style={{
+            color: isEditing ? "#00BFFF" : "whitesmoke",
+            background: isEditing ? "whitesmoke" : "#00BFFF",
+          }}
           onClick={handleUpdate}
           type="submit"
         >
