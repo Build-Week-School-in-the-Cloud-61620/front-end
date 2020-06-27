@@ -29,14 +29,14 @@ export const FETCH_VOLTASKS_AS_ADMIN_FAILURE =
   "FETCH_VOLTASKS_AS_ADMIN_FAILURE";
 
 export const ADD_VOLTASKS_AS_ADMIN_START = "ADD_VOLTASKS_AS_ADMIN_START";
-export const ADD_VOLTASKS_AS_ADMIN_SUCCESS = "FETCH_VOLTASKS_AS_ADMIN_SUCCESS";
-export const ADD_VOLTASKS_AS_ADMIN_FAILURE = "FETCH_VOLTASKS_AS_ADMIN_FAILURE";
+export const ADD_VOLTASKS_AS_ADMIN_SUCCESS = "ADD_VOLTASKS_AS_ADMIN_SUCCESS";
+export const ADD_VOLTASKS_AS_ADMIN_FAILURE = "ADD_VOLTASKS_AS_ADMIN_FAILURE";
 
 export const UPDATE_VOLTASKS_AS_ADMIN_START = "UPDATE_VOLTASKS_AS_ADMIN_START";
 export const UPDATE_VOLTASKS_AS_ADMIN_SUCCESS =
-  "FETCH_VOLTASKS_AS_ADMIN_SUCCESS";
+  "UPDATE_VOLTASKS_AS_ADMIN_SUCCESS";
 export const UPDATE_VOLTASKS_AS_ADMIN_FAILURE =
-  "FETCH_VOLTASKS_AS_ADMIN_FAILURE";
+  "UPDATE_VOLTASKS_AS_ADMIN_FAILURE";
 
 export const DELETE_VOLTASKS_AS_ADMIN_START = "DELETE_VOLTASKS_AS_ADMIN_START";
 export const DELETE_VOLTASKS_AS_ADMIN_SUCCESS =
@@ -51,7 +51,7 @@ export const loginUser = (credentials, props) => (dispatch) => {
     .post(`/auth/login`, credentials)
     .then((res) => {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.user });
-      console.log(res, res.data);
+      console.log("LOGIN*****", res, res.data);
       localStorage.setItem("token", res.data.token);
       props.history.push("/protected");
     })
@@ -101,11 +101,11 @@ export const fetchVols = () => (dispatch) => {
   axiosWithAuth()
     .get("/admin/volunteer/all")
     .then((res) => {
-      // console.log(res.data);
+      console.log("GET vols*****", res);
       dispatch({ type: FETCH_VOLUNTEERS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
-      // console.log(err.message);
+      console.log("GET vols err:".err);
       dispatch({ type: FETCH_VOLUNTEERS_FAILURE, payload: err.message });
     });
 };
@@ -127,15 +127,20 @@ export const fetchVolTasksAsAdmin = (id) => (dispatch) => {
 //Add task as admin
 export const addVolTasksAsAdmin = (adminId, volId, task) => (dispatch) => {
   dispatch({ type: ADD_VOLTASKS_AS_ADMIN_START });
-  console.log("task in add task action: ", task);
+  console.log("adminId in action to add tasks: ", adminId);
   axiosWithAuth()
     .post(`/admin/${adminId}/tasks/${volId}`, task)
     .then((res) => {
-      console.log("actions js 135", res);
-      dispatch({ type: ADD_VOLTASKS_AS_ADMIN_SUCCESS });
+      console.log("actions js 135", res.data);
+      dispatch({
+        type: ADD_VOLTASKS_AS_ADMIN_SUCCESS, payload: res.data
+      });
     })
     .catch((err) => {
-      dispatch({ type: ADD_VOLTASKS_AS_ADMIN_FAILURE, payload: err });
+      dispatch({
+        type: ADD_VOLTASKS_AS_ADMIN_FAILURE,
+        payload: `Catching error from adding task: ${err.response}`,
+      });
       console.log(err);
     });
 };
@@ -154,7 +159,10 @@ export const updateTaskAsAdmin = (todo, task) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({ type: UPDATE_VOLTASKS_AS_ADMIN_FAILURE });
+      dispatch({
+        type: UPDATE_VOLTASKS_AS_ADMIN_FAILURE,
+        payload: `Catching err from updating: ${err.response}`,
+      });
       console.log("***PUT req error", err);
     });
 };

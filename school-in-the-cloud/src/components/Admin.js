@@ -11,8 +11,10 @@ import { Link } from "react-router-dom";
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const { volunteers } = useSelector((state) => state);
-
+  const { volunteers, user, isLoggedIn } = useSelector((state) => state);
+  console.log(
+    `from Admin view: admin is ${user.name} and logged in = ${isLoggedIn}`
+  );
   useEffect(() => {
     dispatch(fetchVols());
   }, []);
@@ -45,7 +47,10 @@ const Admin = () => {
             return (
               <Link
                 key={vol.id}
-                to={{ pathname: "/volunteer-view", volId: vol.id }}
+                to={{
+                  pathname: "/volunteer-view",
+                  state: { volId: vol.id, userId: user.id },
+                }}
               >
                 <li key={vol.id} volunteer={vol}>
                   {vol.name}

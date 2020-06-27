@@ -43,9 +43,10 @@ const Todo = ({ todo, setTask, task }) => {
         </Button>
         <Button
           style={{ color: "whitesmoke", background: " #00BFFF" }}
-          onClick={() => {
+          onClick={(e) => {
             //Pull task value and task from props
             //Dispatch action
+            e.preventDefault();
             dispatch(updateTaskAsAdmin(todo, task));
           }}
           type="submit"

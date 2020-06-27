@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import "./TodoList.css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
 // import TodoForm from "./TodoForm";
@@ -12,13 +12,13 @@ const TodoList = (props) => {
   const { tasks, user } = useSelector((state) => state);
   // console.log(tasks);
 
-  // console.log("TodoForm", user, props.volId);
+  console.log("TodoForm", props.userId, props.volId);
 
   const [task, setTask] = useState({ description: "", completed: 0 });
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addVolTasksAsAdmin(user.id, props.volId, task));
-    // dispatch(fetchVolTasksAsAdmin(props.volId));
+    dispatch(addVolTasksAsAdmin(props.userId, props.volId, task));
+
     setTask({ description: "", completed: 0 });
   };
 
@@ -28,11 +28,11 @@ const TodoList = (props) => {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
+  useMemo(() => {
     console.log("use effect called", props.volId);
 
     dispatch(fetchVolTasksAsAdmin(props.volId));
-  }, [props.volId]);
+  }, [user]);
 
   // const completeTodo = (index) => {
   //   const newTodos = [...todos];

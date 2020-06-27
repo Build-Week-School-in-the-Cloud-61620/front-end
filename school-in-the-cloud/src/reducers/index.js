@@ -53,6 +53,7 @@ const initialState = {
     role: "",
   },
   tasks: [],
+  addedTask: [],
   error: "",
   success: "",
   creatingUser: false,
@@ -77,9 +78,14 @@ export const reducer = (state = initialState, action) => {
     case CREATE_USER_FAILURE:
       return { ...state, creatingUser: false, error: action.payload };
     case LOGIN_USER_START:
-      return { ...state, isLoggingIn: true };
+      return { ...state, isLoggingIn: true, isLoggedIn: false };
     case LOGIN_USER_SUCCESS:
-      return { ...state, isLoggingIn: false, user: action.payload };
+      return {
+        ...state,
+        isLoggingIn: false,
+        user: action.payload,
+        isLoggedIn: true,
+      };
     case LOGIN_USER_FAILURE:
       return { ...state, isLoggingIn: false, error: action.payload };
     case FETCH_VOLUNTEERS_START:
@@ -103,7 +109,11 @@ export const reducer = (state = initialState, action) => {
     case ADD_VOLTASKS_AS_ADMIN_START:
       return { ...state, isAdding: true };
     case ADD_VOLTASKS_AS_ADMIN_SUCCESS:
-      return { ...state, isAdding: false };
+      return {
+        ...state,
+        isAdding: false,
+        tasks: [...state.tasks, action.payload],
+      };
     case ADD_VOLTASKS_AS_ADMIN_FAILURE:
       return { ...state, isAdding: false, error: action.payload };
     case DELETE_VOLTASKS_AS_ADMIN_START:
@@ -127,7 +137,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isUpdating: false,
-        tasks: state.tasks,
       };
     case UPDATE_VOLTASKS_AS_ADMIN_FAILURE:
       return { ...state, isUpdating: true, error: action.payload };
