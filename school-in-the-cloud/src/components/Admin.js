@@ -16,7 +16,7 @@ const Admin = () => {
   );
   useEffect(() => {
     dispatch(fetchVols());
-  }, []);
+  }, [dispatch]);
   // console.log("YAAAAAAAAAAMMMMMMMSSSS");
   // useEffect(() => {
   //   axiosWithAuth()
