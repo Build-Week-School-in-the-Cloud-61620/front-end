@@ -133,7 +133,8 @@ export const addVolTasksAsAdmin = (adminId, volId, task) => (dispatch) => {
     .then((res) => {
       console.log("actions js 135", res.data);
       dispatch({
-        type: ADD_VOLTASKS_AS_ADMIN_SUCCESS, payload: res.data
+        type: ADD_VOLTASKS_AS_ADMIN_SUCCESS,
+        payload: res.data,
       });
     })
     .catch((err) => {
@@ -152,7 +153,7 @@ export const updateTaskAsAdmin = (todo, task) => (dispatch) => {
   axiosWithAuth()
     .put(`/admin/${todo.id}/tasks`, newTodo)
     .then((res) => {
-      console.log("***PUT req", res.config.data);
+      console.log("***PUT req", JSON.parse(res.config.data));
       dispatch({
         type: UPDATE_VOLTASKS_AS_ADMIN_SUCCESS,
         payload: JSON.parse(res.config.data),

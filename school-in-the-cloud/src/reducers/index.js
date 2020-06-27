@@ -137,6 +137,13 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isUpdating: false,
+        tasks: state.tasks.map((task) => {
+          if (task.id === action.payload.id) {
+            task.description = action.payload.description;
+            return task;
+          }
+          return task;
+        }),
       };
     case UPDATE_VOLTASKS_AS_ADMIN_FAILURE:
       return { ...state, isUpdating: true, error: action.payload };

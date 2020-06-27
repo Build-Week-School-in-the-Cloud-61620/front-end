@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "./TodoList.css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
 // import TodoForm from "./TodoForm";
@@ -18,7 +18,11 @@ const TodoList = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addVolTasksAsAdmin(props.userId, props.volId, task));
+    clearInput();
+    // setTask({ description: "", completed: 0 });
+  };
 
+  const clearInput = () => {
     setTask({ description: "", completed: 0 });
   };
 
@@ -28,11 +32,11 @@ const TodoList = (props) => {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-  useMemo(() => {
+  useEffect(() => {
     console.log("use effect called", props.volId);
 
     dispatch(fetchVolTasksAsAdmin(props.volId));
-  }, [user]);
+  }, []);
 
   // const completeTodo = (index) => {
   //   const newTodos = [...todos];
@@ -81,6 +85,7 @@ const TodoList = (props) => {
               todo={t}
               setTask={setTask}
               task={task.description}
+              clearInput={clearInput}
             />
           )))
         }

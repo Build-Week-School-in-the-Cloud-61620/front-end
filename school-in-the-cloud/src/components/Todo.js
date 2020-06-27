@@ -4,13 +4,17 @@ import { Button } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { updateTaskAsAdmin, deleteTasksAsAdmin } from "../actions";
 
-const Todo = ({ todo, setTask, task }) => {
+const Todo = ({ todo, setTask, task, clearInput }) => {
   const dispatch = useDispatch();
   const handleDelete = (id) => {
-    dispatch(deleteTasksAsAdmin(id));
+    dispatch(deleteTasksAsAdmin());
   };
 
-  const handleUpdate = (e) => {};
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    dispatch(updateTaskAsAdmin(todo, task));
+    clearInput();
+  };
   return (
     <div
       className="todo"
@@ -43,12 +47,7 @@ const Todo = ({ todo, setTask, task }) => {
         </Button>
         <Button
           style={{ color: "whitesmoke", background: " #00BFFF" }}
-          onClick={(e) => {
-            //Pull task value and task from props
-            //Dispatch action
-            e.preventDefault();
-            dispatch(updateTaskAsAdmin(todo, task));
-          }}
+          onClick={handleUpdate}
           type="submit"
         >
           Submit Update
