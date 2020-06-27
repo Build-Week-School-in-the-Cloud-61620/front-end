@@ -17,6 +17,12 @@ import {
   ADD_VOLTASKS_AS_ADMIN_START,
   ADD_VOLTASKS_AS_ADMIN_SUCCESS,
   ADD_VOLTASKS_AS_ADMIN_FAILURE,
+  DELETE_VOLTASKS_AS_ADMIN_FAILURE,
+  DELETE_VOLTASKS_AS_ADMIN_SUCCESS,
+  DELETE_VOLTASKS_AS_ADMIN_START,
+  UPDATE_VOLTASKS_AS_ADMIN_START,
+  UPDATE_VOLTASKS_AS_ADMIN_SUCCESS,
+  UPDATE_VOLTASKS_AS_ADMIN_FAILURE,
 } from "../actions";
 
 const initialState = {
@@ -47,6 +53,7 @@ const initialState = {
     role: "",
   },
   tasks: [],
+  addedTask: [],
   error: "",
   success: "",
   creatingUser: false,
@@ -71,9 +78,14 @@ export const reducer = (state = initialState, action) => {
     case CREATE_USER_FAILURE:
       return { ...state, creatingUser: false, error: action.payload };
     case LOGIN_USER_START:
-      return { ...state, isLoggingIn: true };
+      return { ...state, isLoggingIn: true, isLoggedIn: false };
     case LOGIN_USER_SUCCESS:
-      return { ...state, isLoggingIn: false, user: action.payload };
+      return {
+        ...state,
+        isLoggingIn: false,
+        user: action.payload,
+        isLoggedIn: true,
+      };
     case LOGIN_USER_FAILURE:
       return { ...state, isLoggingIn: false, error: action.payload };
     case FETCH_VOLUNTEERS_START:
@@ -97,9 +109,44 @@ export const reducer = (state = initialState, action) => {
     case ADD_VOLTASKS_AS_ADMIN_START:
       return { ...state, isAdding: true };
     case ADD_VOLTASKS_AS_ADMIN_SUCCESS:
-      return { ...state, isAdding: false };
+      return {
+        ...state,
+        isAdding: false,
+        tasks: [...state.tasks, action.payload],
+      };
     case ADD_VOLTASKS_AS_ADMIN_FAILURE:
       return { ...state, isAdding: false, error: action.payload };
+    case DELETE_VOLTASKS_AS_ADMIN_START:
+      return { ...state, isDeleting: true, error: "" };
+    case DELETE_VOLTASKS_AS_ADMIN_SUCCESS:
+      return {
+        ...state,
+        isDeleting: false,
+        error: "",
+        tasks: state.tasks.filter((task) => {
+          return task.id !== action.payload;
+        }),
+      };
+    case DELETE_VOLTASKS_AS_ADMIN_FAILURE:
+      return { ...state, isDeleting: false, error: action.payload };
+
+    case UPDATE_VOLTASKS_AS_ADMIN_START:
+      return { ...state, isUpdating: true, error: "" };
+    case UPDATE_VOLTASKS_AS_ADMIN_SUCCESS:
+      console.log("***PUT payload", action.payload);
+      return {
+        ...state,
+        isUpdating: false,
+        tasks: state.tasks.map((task) => {
+          if (task.id === action.payload.id) {
+            task.description = action.payload.description;
+            return task;
+          }
+          return task;
+        }),
+      };
+    case UPDATE_VOLTASKS_AS_ADMIN_FAILURE:
+      return { ...state, isUpdating: true, error: action.payload };
     default:
       return state;
   }

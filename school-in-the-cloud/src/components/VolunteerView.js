@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
 import { Card } from "reactstrap";
 import { AvForm } from "availity-reactstrap-validation";
 import TodoList from "./TodoList";
@@ -12,9 +12,9 @@ const VolunteerView = (props) => {
   //   useEffect(() => {
   //     dispatch(fetchVolTasksAsAdmin(volId));
   //   }, []);
-
-  const { volId } = props.location;
-
+  const { user, isLoggedIn } = useSelector((state) => state);
+  console.log("Link props***", props.location.state);
+  console.log(`from VolunteerView: admin is ${user.name} and logged in = ${isLoggedIn}`);
   return (
     <>
       <div>
@@ -28,7 +28,10 @@ const VolunteerView = (props) => {
             <legend>Tasks</legend>
             {/* BEG:*********************************************** */}
             <Card>
-              <TodoList volId={volId} />
+              <TodoList
+                volId={props.location.state.volId}
+                userId={props.location.state.userId}
+              />
             </Card>
             {/* END:*********************************************** */}
           </Card>

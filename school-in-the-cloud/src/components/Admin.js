@@ -1,30 +1,20 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 // import axios from "axios"; // ** DO NOT DELETE **
 import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 
-const Admin = (props) => {
-    useEffect(() => {
-      axiosWithAuth().get("/admin/volunteer/all").then(res => {
-      // axios.get("https://cat-fact.herokuapp.com/facts").then(res => { // ** DO NOT DELETE **
-        console.log(res);
-      }) 
-      .catch((error) => {
-        console.log("error", error);
-      })
-    }, []);
-import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Form, Card } from "reactstrap";
 import { fetchVols } from "../actions";
 import { Link } from "react-router-dom";
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const { volunteers } = useSelector((state) => state);
-  
+  const { volunteers, user, isLoggedIn } = useSelector((state) => state);
+  console.log(
+    `from Admin view: admin is ${user.name} and logged in = ${isLoggedIn}`
+  );
   useEffect(() => {
     dispatch(fetchVols());
   }, []);
@@ -57,7 +47,10 @@ const Admin = () => {
             return (
               <Link
                 key={vol.id}
-                to={{ pathname: "/volunteer-view", volId: vol.id }}
+                to={{
+                  pathname: "/volunteer-view",
+                  state: { volId: vol.id, userId: user.id },
+                }}
               >
                 <li key={vol.id} volunteer={vol}>
                   {vol.name}
@@ -73,6 +66,5 @@ const Admin = () => {
     </div>
   );
 };
-
 
 export default Admin;

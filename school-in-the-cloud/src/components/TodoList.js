@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./TodoList.css";
-import { Form, FormGroup, Input } from "reactstrap";
+import { Form, FormGroup, Input, Button } from "reactstrap";
 // import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,15 +10,19 @@ import { addVolTasksAsAdmin } from "../actions";
 const TodoList = (props) => {
   const dispatch = useDispatch();
   const { tasks, user } = useSelector((state) => state);
-  console.log(tasks);
+  // console.log(tasks);
 
-  console.log("TodoForm", user, props.volId);
+  console.log("TodoForm", props.userId, props.volId);
 
   const [task, setTask] = useState({ description: "", completed: 0 });
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addVolTasksAsAdmin(user.id, props.volId, task));
-    // dispatch(fetchVolTasksAsAdmin(props.volId));
+    dispatch(addVolTasksAsAdmin(props.userId, props.volId, task));
+    clearInput();
+    // setTask({ description: "", completed: 0 });
+  };
+
+  const clearInput = () => {
     setTask({ description: "", completed: 0 });
   };
 
@@ -29,6 +33,8 @@ const TodoList = (props) => {
   };
 
   useEffect(() => {
+    console.log("use effect called", props.volId);
+
     dispatch(fetchVolTasksAsAdmin(props.volId));
   }, []);
 
@@ -56,11 +62,33 @@ const TodoList = (props) => {
               value={description}
               onChange={handleChange}
             />
+            <Button
+              style={{ color: "whitesmoke", background: " #00BFFF" }}
+              type="submit"
+            >
+              Submit
+            </Button>
+            <Button
+              style={{ color: "whitesmoke", background: " #00BFFF" }}
+              onClick={() => {}}
+              type="submit"
+            >
+              Submit Update
+            </Button>
           </FormGroup>
         </Form>
-        {tasks.map((task) => (
-          <Todo key={task.id} todo={task} />
-        ))}
+        {
+          (console.log("TodoList", tasks),
+          tasks.map((t) => (
+            <Todo
+              key={t.id}
+              todo={t}
+              setTask={setTask}
+              task={task.description}
+              clearInput={clearInput}
+            />
+          )))
+        }
       </div>
     </div>
   );
