@@ -36,7 +36,7 @@ const TodoList = (props) => {
     console.log("use effect called", props.volId);
 
     dispatch(fetchVolTasksAsAdmin(props.volId));
-  }, []);
+  }, [props.volId]);
 
   // const completeTodo = (index) => {
   //   const newTodos = [...todos];
