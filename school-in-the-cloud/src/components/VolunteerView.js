@@ -14,14 +14,16 @@ const VolunteerView = (props) => {
   //   }, []);
   const { user, isLoggedIn } = useSelector((state) => state);
   console.log("Link props***", props.location.state);
-  console.log(`from VolunteerView: admin is ${user.name} and logged in = ${isLoggedIn}`);
+  console.log(
+    `from VolunteerView: admin is ${user.name} and logged in = ${isLoggedIn}`
+  );
   return (
     <>
       <div>
         <AvForm style={{ margin: "15%" }}>
           <Card color="" style={{ background: "#87CEFA" }}>
             <h2 style={{ color: "whitesmoke", margin: "0 auto" }}>
-              Volunteer View!
+              {props.location.state.volunteer.name}'s Tasks
             </h2>
           </Card>
           <Card>

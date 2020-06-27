@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button, FormGroup, Card } from "reactstrap";
 import RoleDropdown from "./RoleDropdown";
 import { createUser } from "../actions";
-import { axios } from "axios";
+import { Link } from "react-router-dom";
+// import { axios } from "axios";
 
 const Signup = () => {
   //Setting state for creating a user...
-
+  const { success } = useSelector((state) => state);
   const [user, setUser] = useState({
     username: "",
     name: "",
@@ -102,7 +103,11 @@ const Signup = () => {
         <option>US</option>
         <option>UK</option>
       </AvField>
-
+      {success && (
+        <p>
+          {success}. Please login in <Link to="/login">here</Link>
+        </p>
+      )}
       <FormGroup>
         <Button>Submit</Button>
       </FormGroup>

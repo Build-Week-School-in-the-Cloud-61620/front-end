@@ -9,7 +9,7 @@ import { addVolTasksAsAdmin } from "../actions";
 
 const TodoList = (props) => {
   const dispatch = useDispatch();
-  const { tasks, user } = useSelector((state) => state);
+  const { tasks } = useSelector((state) => state);
   // console.log(tasks);
 
   console.log("TodoForm", props.userId, props.volId);

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Card } from "reactstrap";
 import { AvForm, AvField, AvGroup } from "availity-reactstrap-validation";
 import { loginUser } from "../actions";
 import RoleDropdown from "./RoleDropdown";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   //React-redux hook used to call dispatch from actions folder...
   const dispatch = useDispatch();
   console.log(props.history);
+  const { error } = useSelector((state) => state);
 
   //Form state for login
   const [credentials, setCredentials] = useState({
@@ -88,8 +90,11 @@ const Login = (props) => {
         </Input>
       </FormGroup> */}
       <RoleDropdown value={role} onChange={handleChanges} />
-
+      {error && <p>{error}</p>}
       <Button type="submit">Submit</Button>
+      <Link to="/signup" style={{ marginLeft: "2%" }}>
+        Sign Up
+      </Link>
     </AvForm>
   );
 };

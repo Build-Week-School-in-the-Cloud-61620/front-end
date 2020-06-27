@@ -18,7 +18,7 @@ const Dashboard = () => {
   }
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>You are not logged in.</h1>
     </div>
   );
 };
